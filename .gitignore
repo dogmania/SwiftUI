@@ -1,5 +1,6 @@
 *.xcuserstate
 *.pbxproj
+*.xcodeproj
 .DS_Store
 SwiftUI_StudyTests
 SwiftUI_StudyUITests
