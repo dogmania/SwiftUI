@@ -8,26 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var dynamicLayout: AnyLayout = AnyLayout(VStackLayout())
     
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            CustomView()
-            ButtonView()
-            Label("SwiftUI", systemImage: "person.circle.fill")
-                .font(.largeTitle)
-            Label(
-                title: {
-                    Text("이게 되는 건가")
-                },
-                icon: {
-                    Circle()
-                        .fill(Color.blue)
-                        .frame(width: 25, height: 25)
-                }
-            )
+        VStack {
+            LimitLineTestView()
         }
         .padding()
     }
@@ -76,6 +61,36 @@ struct CustomVStack<Content: View>: View {
             content()
         }
         .font(.largeTitle)
+    }
+}
+
+struct LimitLineTestView: View {
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "airplane")
+            Text("어디까지 길어질 수 있는지 테스트")
+            Text("길어지면 니가 뭘 할 수 있는데")
+                .layoutPriority(1)
+        }
+        .lineLimit(1)
+    }
+}
+
+struct GeometryView: View {
+    var body: some View {
+        GeometryReader { geometry in
+            VStack {
+                Text("GeometryReader를 사용하면")
+                    .font(.largeTitle)
+                    .frame(width: geometry.size.width / 2,
+                           height: (geometry.size.height / 4) * 3)
+                Text("비율을 계산해서 배치하는 것이 가능하다.")
+                    .font(.largeTitle)
+                    .frame(width: geometry.size.width / 3,
+                           height: geometry.size.height / 4)
+            }
+        }
     }
 }
 
