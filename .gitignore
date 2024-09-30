@@ -1,0 +1,5 @@
+*.xcuserstate
+*.pbxproj
+.DS_Store
+SwiftUI_StudyTests
+SwiftUI_StudyUITests
