@@ -9,11 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @State var dynamicLayout: AnyLayout = AnyLayout(VStackLayout())
+    let speedSetting: SpeedSetting = SpeedSetting()
     
     var body: some View {
         VStack {
-            LimitLineTestView()
+            SpeedControlView()
+            SpeedDisplayView()
         }
+        .environmentObject(speedSetting)
         .padding()
     }
 }
@@ -91,6 +94,26 @@ struct GeometryView: View {
                            height: geometry.size.height / 4)
             }
         }
+    }
+}
+
+class SpeedSetting: ObservableObject {
+    @Published var speed: Double = 0.0
+}
+
+struct SpeedControlView: View {
+    @EnvironmentObject var speedSetting: SpeedSetting
+    
+    var body: some View {
+        Slider(value: $speedSetting.speed, in: 0...100)
+    }
+}
+
+struct SpeedDisplayView: View {
+    @EnvironmentObject var speedSetting: SpeedSetting
+    
+    var body: some View {
+        Text("Speed = \(speedSetting.speed)")
     }
 }
 
