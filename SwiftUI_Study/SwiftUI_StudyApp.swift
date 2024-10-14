@@ -9,9 +9,24 @@ import SwiftUI
 
 @main
 struct SwiftUI_StudyApp: App {
+    
+    @Environment(\.scenePhase) private var scenePhase
+    
     var body: some Scene {
         WindowGroup {
-            ActorDemo()
+            LifecycleDemo()
+        }
+        .onChange(of: scenePhase) {
+            switch scenePhase {
+                case .background:
+                    print("Background")
+                case .inactive:
+                    print("Inactive")
+                case .active:
+                    print("Active")
+                default:
+                    print("Unknown")
+            }
         }
     }
 }
